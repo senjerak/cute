@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=0.75">
+    <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=UnifrakturMaguntia" />
+    <link rel="stylesheet" href="css/style.css">
+    <title>Document</title>
+</head>
+
+<body>
+    <div id="container">
+        <div id="content">
+            <p>
+                There are many things I could say about the Herald, Angel, and his never-ending mission to vanquish abominable, soul-crushing demons of the mind. His kindness and bravery continues to be ever so brilliant, just as immense as the power he weilds in both body and brain. There are not many who can claim to hold such a prescence or patience with the ridiculed and lonely. His selfless drive to protect the people he holds dearest to him is the fuel to the infinite flame that forever warms hearts of the family he's made for himself along the way. A true, caring underdog that inspirationally pulls lost souls, like myself, under his wing. His festive day of Birth aligns tonight.</p>
+            <p>&nbsp;&nbsp;&nbsp;&nbsp;
+                Who I am is not important, but rather, I want to focus on the person I want to be thanks to the inspirational guidance that I have from the Herald. Angel reminds us all that our past doesn't define our future and to accept failure as a learning, growing experience to change who we are going forward for the better. It's never too late to find new, life changing experiences; even in light of a world ending plague. I had genuinely thought that I would never live to meet another lover. Who could, with such immesurable resentment for an uncaring world?
+            </p>
+            <p>&nbsp;&nbsp;&nbsp;&nbsp;
+                I wish that there were more words for the relief that I feel knowing that, in a way, I'm safe now. But, painfully, to admit this depth to him would prove much too difficult. I've been scriping my deepest thoughts for years, feeling the flow of each word pass through me, and yet not once have I opened my mouth in the slightest degree. No one but he has ever been able to make me utter so much as a peep. It's cruel to dwell on such a reality that I face on such a festive night and yet it, nonetheless, highlights his patience and trust with me on a more personal level.
+            </p>
+            <p>&nbsp;&nbsp;&nbsp;&nbsp;
+             I love his eyes, his ears, his hair. I love just about every inch of the man from his forehead to his toes. I love the way he holds me from behind and I love the way he feels in my arms. I love when he thinks of me and the many ways he goes out of his way to show me that he cares. I love that he takes care of me when he doesn't have to. I love that he listens, I love that he remembers, and I most of all love his smile. His real smile. The smile he gives me when I'm happy. Even just the way he pulls me closer in his sleep, knowing even then, unconsciously, that I'm all he's ever wanted and more. How can such a wonderful person bestow such a responsibility on a weak cleric like myself? I've got no clue.
+            </p>
+            <p>&nbsp;&nbsp;&nbsp;&nbsp;
+             All I can hope is that one day I can be just as wonderful as Angel. I have never looked up to someone and learned so much in such little time. I believe I still have so much to learn from not only him, but from the journey we'll both be taking as partners from here now on. I love him all the more for wanting to spend his life with me and I could not be more grateful to finally be seen as myself for who I am. Without him, I would not be where I am now... and that is a gift I have never receieved with more appreciation and grace. So selfish am I to think about all the things he's done for me on his birthday and, yet, the fool only ever seems to think about others with as big of a heart as he has...<br>Loving him has helped me learn to love myself. Is this what love has always meant?<br>
+             03/19
+            </p>
+            <img src="https://www.pngall.com/wp-content/uploads/13/Leaves-Divider-PNG-Image-HD.png">
+        </div>
+    </div>
+    <script>
+        // Hack to detect device scrollbar width.
+        // When a mouse is plugged in, the contents of an element will shift over to accomodate the scrollbar.
+        // We will detect this and shift the .panel-content's to the left via padding-right, else the panels and the main content view become out of sync.
+        //https://codepen.io/browles/pen/pgdMbK
+        (function () {
+            var div = document.createElement('div');
+            div.style.width = '100px';
+            div.style.height = '100px';
+            div.style.overflow = 'scroll';
+            div.style.position = 'absolute';
+            div.style.top = '-9999px';
+            document.body.appendChild(div);
+
+            var scrollBarWidth = div.offsetWidth - div.clientWidth;
+
+            document.body.removeChild(div);
+
+            var style = document.createElement('style');
+            document.querySelector('head').appendChild(style);
+
+            var selector = '.panel-content';
+            var rule = `padding-right: ${scrollBarWidth}px`;
+
+            if (style.sheet) {
+                if (style.sheet.insertRule) style.sheet.insertRule(`${selector} {${rule}}`, 0);
+                else style.sheet.addRule(selector, rule);
+            }
+            else if (style.styleSheet) style.styleSheet.addRule(selector, rule);
+        })();
+
+        // Each articulation panel consists of three DOM elements
+        //  - a grandparent for 3d positioning
+        //  - a parent for clipping
+        //  - and a child to hold and 'scroll' content via changing transforms
+        function panel(html) {
+            var panelNode = document.createElement('div');
+            var panelCutoutNode = document.createElement('div');
+            var panelContentNode = document.createElement('div');
+
+            panelNode.classList.add('panel-node');
+
+            panelCutoutNode.classList.add('panel-cutout');
+
+            panelContentNode.innerHTML = html;
+            panelContentNode.classList.add('panel-content');
+
+            panelCutoutNode.appendChild(panelContentNode);
+            panelNode.appendChild(panelCutoutNode);
+
+            return panelNode;
+        }
+
+        // Keep the content panels in sync by translating them up or down according to the scroll distance
+        function syncPanelContent(tops, bottoms, scrollTop, containerHeight, panelHeight) {
+            for (var i = 0; i < tops.length; i++) {
+                var t = tops[i];
+                var b = bottoms[i];
+                var tTop = (i + 1) * panelHeight - scrollTop;
+                var bTop = -i * panelHeight - scrollTop - containerHeight;
+                t.style.transform = `translate3d(0,${tTop}px,0)`;
+                b.style.transform = `translate3d(0,${bTop}px,0)`;
+            }
+        }
+
+        function transYrotX(y, x) {
+            return `translate3d(0,${y}px,0) rotateX(${x}rad)`;
+        }
+
+        // Create num top and bottom panels based off the innerHTML of el with articulation angle.
+        // We nest panels and use `transform-style: preserve-3d` to get the tentacle curl effect.
+        // Should probably only use this on relatively simple el's, because we are going to need to create 2 * num deep copies of el and attach them to the DOM. Needless to say, this will scale poorly.
+        function createScrollOverlay(el, panelHeight, num, angle) {
+            var tops = [];
+            var bottoms = [];
+
+            var topParent = el.parentNode;
+            var bottomParent = el.parentNode;
+
+            var html = el.innerHTML;
+
+            var totalTheta = 0;
+
+            for (var i = 0; i < num; i++) {
+                var topPanel = panel(html);
+                var bottomPanel = panel(html);
+
+                topPanel.style.height = `${panelHeight}px`;
+                bottomPanel.style.height = `${panelHeight}px`;
+                topPanel.style.transformOrigin = '50% 100% 0';
+                bottomPanel.style.transformOrigin = '50% 0% 0';
+
+                var topPanelContent = topPanel.querySelector('.panel-content');
+                var bottomPanelContent = bottomPanel.querySelector('.panel-content');
+
+                if (i === 0) {
+                    topPanel.style.transform = transYrotX(-panelHeight, 0);
+                    bottomPanel.style.top = '100%';
+                    bottomPanel.style.transform = transYrotX(0, 0);
+                }
+                else {
+                    topPanel.style.transform = transYrotX(-panelHeight + 0.25, angle);
+                    bottomPanel.style.transform = transYrotX(panelHeight - 0.25, angle);
+
+                    totalTheta += angle;
+                    totalTheta %= 2 * Math.PI;
+                    if (Math.PI * (1 / 2) < totalTheta && totalTheta < Math.PI * (3 / 2)) {
+                        topPanelContent.classList.add('backface');
+                        bottomPanelContent.classList.add('backface');
+                    }
+                }
+
+                angle += 0.025;
+
+                tops.push(topPanelContent);
+                bottoms.push(bottomPanelContent);
+
+                topParent.appendChild(topPanel);
+                bottomParent.appendChild(bottomPanel);
+
+                topParent = topPanel;
+                bottomParent = bottomPanel;
+            }
+
+            syncPanelContent(tops, bottoms, 0, container.clientHeight, panelHeight);
+
+            function update() {
+                var scrollTop = el.scrollTop;
+                var containerHeight = container.clientHeight;
+                requestAnimationFrame(function () {
+                    syncPanelContent(tops, bottoms, scrollTop, containerHeight, panelHeight);
+                });
+            }
+
+            el.onscroll = update;
+            window.onresize = update;
+
+            // setInterval(function() {el.scrollTop++}, 32)
+        }
+
+        var theta = 0.3;
+        var num = 20;
+        if (/iPhone|Android/.test(navigator.userAgent)) {
+            theta = 0.45;
+            num = 10;
+        }
+
+        var $ = document.querySelector.bind(document);
+        createScrollOverlay($('#content'), 20, num, theta);
+
+    </script>
+
+</body>
+
+</html>
